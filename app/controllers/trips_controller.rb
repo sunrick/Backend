@@ -14,39 +14,42 @@ class TripsController < ApplicationController
 
     legs = @response['routes'][0]['legs']
 
-    @distance = 0
-    @duration = 0
+    # get places data
+    self.set_duration_time(legs)
+    self.get_places_data(legs)
 
-    legs.each do |leg|
-      @distance += leg['distance']['value'].to_i
-      @duration += leg['duration']['value'].to_i
+    # create trip
+    @trip = current_user.trips.create( distance: @distance, duration: @duration, 
+                                       name: "hello" )
+    # create origin
+    @trip.places.create( user_id: current_user.id, address: @origin[:address], 
+                    latitude: @origin[:latitude], longitude: @origin[:longitude],
+                    place_type: "origin" )
+
+    # create waypoints
+    @waypoints.each do |waypoint|
+      @trip.places.create( user_id: current_user.id, address: waypoint[:address], 
+                    latitude: waypoint[:latitude], longitude: waypoint[:longitude],
+                    place_type: "waypoint" )
     end
-
-    @places = []
-    legs.each do |leg| 
-      result = {
-        address: leg['start_address'],
-        latitude: leg['start_location']['lat'],
-        longitude: leg['start_location']['lng']
-      }
-      @places << result
-    end
-
-    @destination = {
-      address: legs.last['end_address'],
-      latitude: legs.last['end_location']['lat'],
-      longitude: legs.last['end_location']['lng']
-    }
-
-    @places << @destination
-
-    render '_trip.json.jbuilder'
+    # create destination
+    @trip.places.create( user_id: current_user.id, address: @destination[:address], 
+                    latitude: @destination[:latitude], longitude: @destination[:longitude],
+                    place_type: "destination" )
+    render 'create.json.jbuilder'
   end
 
   def show_all
+    @trips = current_user.trips.all
+    render 'trips.json.jbuilder'
   end
 
   def show
+    @trip = current_user.trips.find(params[:id])
+    @origin = @trip.places.find_by(place_type: "origin")
+    @waypoints = @trip.places.where(place_type: "waypoint")
+    @destination = @trip.places.find_by(place_type: "destination")
+    render 'trip.json.jbuilder'
   end
 
   def update
@@ -56,6 +59,40 @@ class TripsController < ApplicationController
 
   def to_string(places)
     places.map { |place| '|'+place }.join
+  end
+
+  def set_duration_time(legs)
+    @distance = 0
+    @duration = 0
+    legs.each do |leg|
+      @distance += leg['distance']['value']
+      @duration += leg['duration']['value']
+    end
+  end
+
+  def get_places_data(legs)
+    @origin = {
+      address: legs.first['start_address'],
+      latitude: legs.first['start_location']['lat'],
+      longitude: legs.first['start_location']['lng']
+    }
+    @waypoints = []
+    legs.each do |leg| 
+      result = {
+        address: leg['start_address'],
+        latitude: leg['start_location']['lat'],
+        longitude: leg['start_location']['lng']
+      }
+      @waypoints << result
+    end
+    # Get rid of first address which is origin
+    @waypoints.shift
+    @destination = {
+      address: legs.last['end_address'],
+      latitude: legs.last['end_location']['lat'],
+      longitude: legs.last['end_location']['lng']
+    }
+    @destination
   end
 
 end
