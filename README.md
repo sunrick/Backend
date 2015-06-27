@@ -119,9 +119,7 @@ Example data successful response:
   "username": "dsfasdf",
   "full_name": "rsdffdasdf",
   "email": "whattt@sup.com",
-  "home_address": "3008 Coosawattee Drive GA 30312",
-  "created_at": "2015-06-19T15:51:02.488Z",
-  "updated_at": "2015-06-19T15:51:02.488Z"
+  "home_address": null,
 }
 ```
 

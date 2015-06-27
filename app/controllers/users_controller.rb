@@ -26,8 +26,8 @@
 
 
   def show
-    @user = User.find_by(username: params[:username])
-    render json: {user: @user.as_json(only: [:id, :full_name, :username, :email, :home_address])}
+    @user = current_user
+    render 'show.json.jbuilder', status: :ok
   end
 
 end 
