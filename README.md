@@ -2,7 +2,7 @@
 
 ## Overview
 
-All access is over HTTPS, and access from the "https://url" domain. All data is sent and received as JSON.
+All access is over HTTPS, and access from the "https://radiant-oasis-8396.herokuapp.com" domain. All data is sent and received as JSON.
 
 ## Access Token
 
