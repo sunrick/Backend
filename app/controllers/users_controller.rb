@@ -40,8 +40,8 @@
  
   def delete
     @user = current_user
-      @user.destroy
       render json: { message: "Account deleted." }, status: :ok
+      @user.destroy
     end
 
 protected
