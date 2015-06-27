@@ -1,5 +1,5 @@
  class UsersController < ApplicationController
-  before_action :authenticate_with_token!, only: [:show, :edit]
+  before_action :authenticate_with_token!, only: [:show, :edit, :delete]
 
   def register
     passhash = self.password_encryption(params[:password]) 
@@ -38,6 +38,11 @@
     render 'edit.json.jbuilder', status: :ok
   end
  
+  def delete
+    @user = current_user
+      @user.destroy
+      render json: { message: "Account deleted." }, status: :ok
+    end
 
 protected
   def password_encryption(password)

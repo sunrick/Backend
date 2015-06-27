@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   post '/users/login', to: 'users#login'
   get '/user/profile', to: 'users#show'
   put '/user/profile', to: 'users#edit'
+  delete '/user', to: 'users#delete'
   
   #TRIPS
   post '/trips/new', to: 'trips#create'
