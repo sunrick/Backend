@@ -2,7 +2,8 @@
   before_action :authenticate_with_token!, only: [:show, :edit]
 
   def register
-    passhash = Digest::SHA1.hexdigest(params[:password])
+    passhash = self.password_encryption(params[:password]) 
+    # passhash = Digest::SHA1.hexdigest(params[:password])
     @user = User.new(username: params[:username], full_name: params[:full_name],
                      email: params[:email], password: passhash)
     if @user.save
@@ -36,15 +37,15 @@
     @user.update(home_address: @home)
     render 'edit.json.jbuilder', status: :ok
   end
-end 
+ 
 
-  # def delete
-  #   @user = User.find_by(username: params[:username])
-  #   if current_user.access_token == @user.access_token
-  #     @user.destroy
-  #     render json: { message: "Account deleted." }, status: :no_content
-  #   else
-  #     render json: { message: "You are not authorized to delete this account!" }, 
-  #       status: :unauthorized
-  #   end
-  # end 
+protected
+  def password_encryption(password)
+    if !password.nil? && password != ""
+      result = Digest::SHA1.hexdigest(password)
+    else
+      result = nil
+    end
+    result
+  end
+end
