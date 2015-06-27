@@ -1,5 +1,5 @@
  class UsersController < ApplicationController
-  before_action :authenticate_with_token!, only: [:show]
+  before_action :authenticate_with_token!, only: [:show, :edit]
 
   def register
     passhash = Digest::SHA1.hexdigest(params[:password])
@@ -30,6 +30,12 @@
     render 'show.json.jbuilder', status: :ok
   end
 
+  def edit
+    @home = params[:home_address]
+    @user = current_user
+    @user.update(home_address: @home)
+    render 'edit.json.jbuilder', status: :ok
+  end
 end 
 
   # def delete
