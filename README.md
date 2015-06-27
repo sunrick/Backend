@@ -148,10 +148,10 @@ Parameters:
 | name       | type   | description                              |
 |------------|--------|------------------------------------------|
 | home_address   | string | default address that a user wants to use          |
-| full_name | string | full name of user to be changed         |
-| email      | string | email of user to be changed              |
 
-#### !DOES NOT SUPPORT CHANGING PASSWORD!
+
+
+#### !ONLY SUPPORTS CHANGING HOME ADDRESS!
 
 Example data successful response:
 
@@ -162,8 +162,6 @@ Example data successful response:
   "full_name": "rsdffdasdf",
   "email": "whattt@sup.com",
   "home_address": "3008 Coosawattee Drive GA 30312",
-  "created_at": "2015-06-19T15:51:02.488Z",
-  "updated_at": "2015-06-19T15:51:02.488Z"
 }
 ```
 
