@@ -126,7 +126,7 @@ Example data successful response:
   "fullname": "rsdffdasdf",
   "email": "whattt@sup.com",
   "home_address": "3008 Coosawattee Drive GA 30312",
-  "created_at": "2015-06-19T15:51:02.488Z"
+  "created_at": "2015-06-19T15:51:02.488Z",
   "updated_at": "2015-06-19T15:51:02.488Z"
 }
 ```
@@ -170,7 +170,7 @@ Example data successful response:
   "fullname": "rsdffdasdf",
   "email": "whattt@sup.com",
   "home_address": "3008 Coosawattee Drive GA 30312",
-  "created_at": "2015-06-19T15:51:02.488Z"
+  "created_at": "2015-06-19T15:51:02.488Z",
   "updated_at": "2015-06-19T15:51:02.488Z"
 }
 ```
@@ -282,8 +282,7 @@ Example data successful response:
   "origin": {
     "address": "3008 Coosawattee Drive GA 30312"
   },
-  "places": {
-    [
+  "places": [
       {
         "address": "3008 Somewhere Drive GA 30312"
       },
@@ -293,8 +292,7 @@ Example data successful response:
       {
         "address": "3008 Sverige Drive GA 30312"
       }
-    ]
-  }
+  ]
 }
 ```
 
@@ -328,8 +326,7 @@ Example data successful response:
   "origin": {
     "address": "3008 Coosawattee Drive GA 30312"
   },
-  "places": {
-    [
+  "places": [
       {
         "address": "3008 Somewhere Drive GA 30312"
       },
@@ -339,8 +336,7 @@ Example data successful response:
       {
         "address": "3008 Sverige Drive GA 30312"
       }
-    ]
-  }
+  ]
 },
 {
   "id": "232",
@@ -354,8 +350,7 @@ Example data successful response:
   "origin": {
     "address": "3008 Coosawattee Drive GA 30312"
   },
-  "places": {
-    [
+  "places": [
       {
         "address": "3008 Somewhere Drive GA 30312"
       },
@@ -365,8 +360,7 @@ Example data successful response:
       {
         "address": "3008 Sverige Drive GA 30312"
       }
-    ]
-  }
+  ]
 }
 ]
 ```
