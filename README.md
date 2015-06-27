@@ -174,6 +174,23 @@ Response Status Code: 404
   "message": "There is no user to display."
 }
 ```
+###Delete a User
+Access-Token:
+
+Required.
+
+Path:
+
+`DELETE '/user'`
+
+Example data successful response:
+
+```
+{
+  "message": "Account deleted."
+}
+```
+
 
 ## Create and view trips
 
