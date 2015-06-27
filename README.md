@@ -199,32 +199,44 @@ Parameters:
 | place1 | string | first location user enters         |
 | place2     | string | second location user enters              |
 | place3     | string | third location user enters              |
+| destination    | string | final location that user wants to end up at             |
 
 Example data successful response:
 
 ```json
 {
-  "id": "231",
-  "trip_info" : {
-    "name": "House hunting",
-    "duration": "1h30mins",
-    "distance": "44 miles",
-    "created_at": "2015-06-19T15:51:02.488Z",
-    "updated_at": "2015-06-19T15:51:02.488Z"
+  "id": "placeholder (should be number)",
+  "trip": {
+    "name": "placeholder",
+    "distance": 80942,
+    "duration": 5334
   },
-  "origin": {
-    "address": "3008 Coosawattee Drive GA 30312"
-  },
-  "places": [
-      {
-        "address": "3008 Somewhere Drive GA 30312"
-      },
-      {
-        "address": "3008 Whocares Drive GA 30312"
-      },
-      {
-        "address": "3008 Sverige Drive GA 30312"
-      }
+  "route": [
+    {
+      "address": "Druid Hills, Atlanta, GA, USA",
+      "latitude": 33.7744205,
+      "longitude": -84.33970699999999
+    },
+    {
+      "address": "1016 Princeton Walk Northeast, Marietta, GA 30068, USA",
+      "latitude": 33.9756022,
+      "longitude": -84.4284237
+    },
+    {
+      "address": "115 Martin Luther King Junior Drive Northwest, Atlanta, GA 30303, USA",
+      "latitude": 33.751724,
+      "longitude": -84.3915205
+    },
+    {
+      "address": "215 Pryor Street Southwest, Atlanta, GA 30303, USA",
+      "latitude": 33.7488366,
+      "longitude": -84.393001
+    },
+    {
+      "address": "Druid Hills, Atlanta, GA, USA",
+      "latitude": 33.7744205,
+      "longitude": -84.33970699999999
+    }
   ]
 }
 ```
@@ -259,27 +271,38 @@ Example data successful response:
 
 ```json
 {
-  "id": "231",
-  "trip_info" : {
-    "name": "House hunting",
-    "duration": "1h30mins",
-    "distance": "44 miles",
-    "created_at": "2015-06-19T15:51:02.488Z",
-    "updated_at": "2015-06-19T15:51:02.488Z"
+  "id": "placeholder (should be number)",
+  "trip": {
+    "name": "placeholder",
+    "distance": 80942,
+    "duration": 5334
   },
-  "origin": {
-    "address": "3008 Coosawattee Drive GA 30312"
-  },
-  "places": [
-      {
-        "address": "3008 Somewhere Drive GA 30312"
-      },
-      {
-        "address": "3008 Whocares Drive GA 30312"
-      },
-      {
-        "address": "3008 Sverige Drive GA 30312"
-      }
+  "route": [
+    {
+      "address": "Druid Hills, Atlanta, GA, USA",
+      "latitude": 33.7744205,
+      "longitude": -84.33970699999999
+    },
+    {
+      "address": "1016 Princeton Walk Northeast, Marietta, GA 30068, USA",
+      "latitude": 33.9756022,
+      "longitude": -84.4284237
+    },
+    {
+      "address": "115 Martin Luther King Junior Drive Northwest, Atlanta, GA 30303, USA",
+      "latitude": 33.751724,
+      "longitude": -84.3915205
+    },
+    {
+      "address": "215 Pryor Street Southwest, Atlanta, GA 30303, USA",
+      "latitude": 33.7488366,
+      "longitude": -84.393001
+    },
+    {
+      "address": "Druid Hills, Atlanta, GA, USA",
+      "latitude": 33.7744205,
+      "longitude": -84.33970699999999
+    }
   ]
 }
 ```
@@ -303,51 +326,74 @@ Example data successful response:
 ```json
 [
 {
-  "id": "231",
-  "trip_info" : {
-    "name": "House hunting",
-    "duration": "1h30mins",
-    "distance": "44 miles",
-    "created_at": "2015-06-19T15:51:02.488Z",
-    "updated_at": "2015-06-19T15:51:02.488Z"
+  "id": "placeholder (should be number)",
+  "trip": {
+    "name": "placeholder",
+    "distance": 80942,
+    "duration": 5334
   },
-  "origin": {
-    "address": "3008 Coosawattee Drive GA 30312"
-  },
-  "places": [
-      {
-        "address": "3008 Somewhere Drive GA 30312"
-      },
-      {
-        "address": "3008 Whocares Drive GA 30312"
-      },
-      {
-        "address": "3008 Sverige Drive GA 30312"
-      }
+  "route": [
+    {
+      "address": "Druid Hills, Atlanta, GA, USA",
+      "latitude": 33.7744205,
+      "longitude": -84.33970699999999
+    },
+    {
+      "address": "1016 Princeton Walk Northeast, Marietta, GA 30068, USA",
+      "latitude": 33.9756022,
+      "longitude": -84.4284237
+    },
+    {
+      "address": "115 Martin Luther King Junior Drive Northwest, Atlanta, GA 30303, USA",
+      "latitude": 33.751724,
+      "longitude": -84.3915205
+    },
+    {
+      "address": "215 Pryor Street Southwest, Atlanta, GA 30303, USA",
+      "latitude": 33.7488366,
+      "longitude": -84.393001
+    },
+    {
+      "address": "Druid Hills, Atlanta, GA, USA",
+      "latitude": 33.7744205,
+      "longitude": -84.33970699999999
+    }
   ]
-},
+}
+,
 {
-  "id": "232",
-  "trip_info" : {
-    "name": "Grocery stores",
-    "duration": "0h32mins",
-    "distance": "12 miles",
-    "created_at": "2015-06-19T15:51:02.488Z",
-    "updated_at": "2015-06-19T15:51:02.488Z"
+  "id": "placeholder (should be number)",
+  "trip": {
+    "name": "placeholder",
+    "distance": 80942,
+    "duration": 5334
   },
-  "origin": {
-    "address": "3008 Coosawattee Drive GA 30312"
-  },
-  "places": [
-      {
-        "address": "3008 Somewhere Drive GA 30312"
-      },
-      {
-        "address": "3008 Whocares Drive GA 30312"
-      },
-      {
-        "address": "3008 Sverige Drive GA 30312"
-      }
+  "route": [
+    {
+      "address": "Druid Hills, Atlanta, GA, USA",
+      "latitude": 33.7744205,
+      "longitude": -84.33970699999999
+    },
+    {
+      "address": "1016 Princeton Walk Northeast, Marietta, GA 30068, USA",
+      "latitude": 33.9756022,
+      "longitude": -84.4284237
+    },
+    {
+      "address": "115 Martin Luther King Junior Drive Northwest, Atlanta, GA 30303, USA",
+      "latitude": 33.751724,
+      "longitude": -84.3915205
+    },
+    {
+      "address": "215 Pryor Street Southwest, Atlanta, GA 30303, USA",
+      "latitude": 33.7488366,
+      "longitude": -84.393001
+    },
+    {
+      "address": "Druid Hills, Atlanta, GA, USA",
+      "latitude": 33.7744205,
+      "longitude": -84.33970699999999
+    }
   ]
 }
 ]
