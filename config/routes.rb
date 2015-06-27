@@ -9,10 +9,10 @@ Rails.application.routes.draw do
   root to: 'welcome#index'
 
   #USER
-  post '/users/register'
-  post '/users/login'
-  get '/user/profile'
-  put '/user/profile'
+  post '/users/register', to: 'users#register'
+  post '/users/login', to: 'users#login'
+  get '/user/profile', to: 'users#show'
+  put '/user/profile', to: 'users#edit'
   
   #TRIPS
   post '/trips/new', to: 'trips#create'
