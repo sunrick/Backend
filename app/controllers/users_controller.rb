@@ -19,8 +19,8 @@
     @user = User.find_by(username: params[:username])
     passhash = Digest::SHA1.hexdigest(params[:password])
     if @user && passhash == @user.password
-      render json: {user: @user.as_json(only: [:id, :username, :email, :access_token]) },
-        status: :created
+      render json: {user: @user.as_json(only: [:id, :username, :access_token]) },
+        status: :ok
     else
       render json: { message: "Invalid login or password." },
         status: :unauthorized
@@ -33,7 +33,7 @@
     render json: {user: @user.as_json(only: [:id, :full_name, :username, :email, :home_address])}
   end
 
-  
+end 
 
   # def delete
   #   @user = User.find_by(username: params[:username])
