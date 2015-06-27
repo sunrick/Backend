@@ -32,23 +32,21 @@ Parameters:
 |------------|--------|------------------------------------------|
 | username   | string | username for user to be created          |
 | password   | string | password has to be at least 8 characters |
-| fullname | string | full name of user to be created         |
+| full_name | string | full name of user to be created         |
 | email      | string | email of user to be created              |
 
 
 Example data successful response:
 
-```json
-Response Status Code: 201
-
-{
-  "username": "whatever",
-  "access_token": "f16395873f4bcee7ef5d46e531b9f659f16395873f4bcee7ef5d46e531b9f659",
-  "fullname": "John",
-  "email": "johndoe@gmail.com",
-  "home_address": "3008 Coosawattee Drive GA 30312",
-  "created_at": "2015-06-19T15:51:02.488Z",
-  "updated_at": "2015-06-19T15:51:02.488Z"
+```{
+  "user": {
+    "id": 1,
+    "username": "testuser1",
+    "full_name": "Test User1",
+    "email": "test1@gmail.com",
+    "home_address": "1000 Princeton Court Marietta GA 30062",
+    "access_token": "41141063af5c294"
+  }
 }
 ```
 
@@ -63,7 +61,7 @@ Response Status Code: 422
     "Email can't be blank",
     "Email is not a valid email.",
     "User name can't be blank",
-    "Fullname can't be blank"
+    "Full_name can't be blank"
   ]
 }
 
@@ -90,10 +88,12 @@ Example data successful response:
 
 ```json
 Response Status Code: 200
-
 {
-  "username": "whatever",
-  "access_token": "f16395873f4bcee7ef5d46e531b9f659"
+  "user": {
+    "id": 1,
+    "username": "testuser1",
+    "access_token": "41141063af5c294"
+  }
 }
 ```
 
@@ -123,7 +123,7 @@ Example data successful response:
 
 {
   "username": "dsfasdf",
-  "fullname": "rsdffdasdf",
+  "full_name": "rsdffdasdf",
   "email": "whattt@sup.com",
   "home_address": "3008 Coosawattee Drive GA 30312",
   "created_at": "2015-06-19T15:51:02.488Z",
@@ -156,7 +156,7 @@ Parameters:
 | name       | type   | description                              |
 |------------|--------|------------------------------------------|
 | home_address   | string | default address that a user wants to use          |
-| fullname | string | full name of user to be changed         |
+| full_name | string | full name of user to be changed         |
 | email      | string | email of user to be changed              |
 
 #### !DOES NOT SUPPORT CHANGING PASSWORD!
@@ -167,7 +167,7 @@ Example data successful response:
 
 {
   "username": "dsfasdf",
-  "fullname": "rsdffdasdf",
+  "full_name": "rsdffdasdf",
   "email": "whattt@sup.com",
   "home_address": "3008 Coosawattee Drive GA 30312",
   "created_at": "2015-06-19T15:51:02.488Z",
