@@ -225,8 +225,7 @@ Example data successful response:
   "origin": {
     "address": "3008 Coosawattee Drive GA 30312"
   },
-  "places": {
-    [
+  "places": [
       {
         "address": "3008 Somewhere Drive GA 30312"
       },
@@ -236,8 +235,7 @@ Example data successful response:
       {
         "address": "3008 Sverige Drive GA 30312"
       }
-    ]
-  }
+  ]
 }
 ```
 
