@@ -38,15 +38,12 @@ Parameters:
 
 Example data successful response:
 
-```{
-  "user": {
-    "id": 1,
-    "username": "testuser1",
-    "full_name": "Test User1",
-    "email": "test1@gmail.com",
-    "home_address": "1000 Princeton Court Marietta GA 30062",
-    "access_token": "41141063af5c294"
-  }
+```
+{
+  "username": "testuser3",
+  "full_name": "Test User3",
+  "email": "test3@gmail.com",
+  "access_token": "8f941eccc64db15"
 }
 ```
 
@@ -89,11 +86,8 @@ Example data successful response:
 ```json
 Response Status Code: 200
 {
-  "user": {
-    "id": 1,
-    "username": "testuser1",
-    "access_token": "41141063af5c294"
-  }
+  "username": "testuser3",
+  "access_token": "8f941eccc64db15a915"
 }
 ```
 
