@@ -38,6 +38,9 @@ gem 'pg'
 # Use puma for server
 gem 'puma'
 
+# Use httparty for request to google api
+gem 'httparty'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
