@@ -20,8 +20,7 @@ class TripsController < ApplicationController
     self.get_places_data(legs)
 
     # create trip
-    @trip = current_user.trips.create( distance: @distance, duration: @duration, 
-                                       name: "hello" )
+    @trip = current_user.trips.create( name: params[:name] )
     # create origin
     @trip.places.create( user_id: current_user.id, address: @origin[:address], 
                     latitude: @origin[:latitude], longitude: @origin[:longitude],
