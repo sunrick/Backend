@@ -52,6 +52,8 @@ class TripsController < ApplicationController
     @waypoints = self.to_string(@waypoints)
     @destination = @trip.places.find_by(place_type: "destination")
 
+    binding.pry
+
     @options = { query: { origin: @origin.address, destination: @destination.address, 
                           waypoints: "optimize:true#{@waypoints}"}, units: "imperial" }
     @response = HTTParty.get(BASE_URL,@options)
@@ -92,7 +94,6 @@ class TripsController < ApplicationController
     waypoints.each do |waypoint|
       # @waypoint is new waypoint
       waypoint_update = @waypoints.first
-      binding.pry
       @trip.places.find_by(place_type: 'waypoint')
                     .update( address: waypoint_update[:address], 
                            latitude: waypoint_update[:latitude], 
