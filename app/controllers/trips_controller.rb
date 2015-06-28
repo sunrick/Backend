@@ -45,14 +45,65 @@ class TripsController < ApplicationController
   end
 
   def show
+    # method checks google and updates the order
     @trip = current_user.trips.find(params[:id])
     @origin = @trip.places.find_by(place_type: "origin")
-    @waypoints = @trip.places.where(place_type: "waypoint")
+    @waypoints = @trip.places.where(place_type: "waypoint").pluck(:address)
+    @waypoints = self.to_string(@waypoints)
     @destination = @trip.places.find_by(place_type: "destination")
-    render 'trip.json.jbuilder'
+
+    @options = { query: { origin: @origin.address, destination: @destination.address, 
+                          waypoints: "optimize:true#{@waypoints}"}, units: "imperial" }
+    @response = HTTParty.get(BASE_URL,@options)
+
+    legs = @response['routes'][0]['legs']
+
+    self.set_duration_time(legs)
+    self.get_places_data(legs)
+
+    render 'create.json.jbuilder'
   end
 
   def update
+    places = [ params[:place1], params[:place2], params[:place3]]
+    places = self.to_string(places)
+
+    @options = { query: { origin: params[:origin], destination: params[:destination], 
+                          waypoints: "optimize:true#{places}"}, units: "imperial" }
+    @response = HTTParty.get(BASE_URL,@options)
+
+    legs = @response['routes'][0]['legs']
+
+    # get places data
+    self.set_duration_time(legs)
+    self.get_places_data(legs)
+
+    @trip = current_user.trips.find(params[:id])
+    
+    # update origin
+    @trip.places.find_by(place_type: 'origin').update( address: @origin[:address], 
+                    latitude: @origin[:latitude], longitude: @origin[:longitude])
+    # update destination
+    @trip.places.find_by(place_type: 'destination').update( address: @destination[:address], 
+                latitude: @destination[:latitude], longitude: @destination[:longitude])
+
+    # update waypoints
+    waypoints = @trip.places.where(place_type: 'waypoint')
+    waypoints.each do |waypoint|
+      # @waypoint is new waypoint
+      waypoint_update = @waypoints.first
+      binding.pry
+      @trip.places.find_by(place_type: 'waypoint')
+                    .update( address: waypoint_update[:address], 
+                           latitude: waypoint_update[:latitude], 
+                           longitude: waypoint_update[:longitude] )
+
+      # delete first waypoint
+      if !@waypoint.nil?
+        @waypoint.shift
+      end
+    end
+    render 'create.json.jbuilder'
   end
 
   protected
