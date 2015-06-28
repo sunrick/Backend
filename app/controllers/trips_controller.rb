@@ -1,4 +1,5 @@
 class TripsController < ApplicationController
+  before_action :authenticate_with_token!, only: [:show, :update, :show_all]
   include HTTParty
   # base_uri "maps.googleapis.com/maps/api/directions/json"
   BASE_URL = "https://maps.googleapis.com/maps/api/directions/json?"
