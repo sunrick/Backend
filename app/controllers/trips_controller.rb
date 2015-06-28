@@ -188,9 +188,9 @@ class TripsController < ApplicationController
     seconds = total_seconds % 60
     minutes = (total_seconds / 60) % 60
     hours = total_seconds / (60 * 60) % 24
-    # days = total_seconds / (60 * 60 * 24) % 7
-    # weeks = total_seconds / (60 * 60 * 24 * 7)
-    format("%02d hrs, %02d mins, %02d secs", hours, minutes, seconds)
+    days = total_seconds / (60 * 60 * 24) % 7
+    weeks = total_seconds / (60 * 60 * 24 * 7)
+    format("%02d weeks, %02d days, %02d hrs, %02d mins, %02d secs", weeks, days, hours, minutes, seconds)
   end
 
   def distance_calc(distance)
