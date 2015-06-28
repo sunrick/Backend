@@ -231,6 +231,7 @@ Example data successful response:
   "id": 12,
   "trip": {
     "name": "hello",
+    "description": "hey",
     "distance": 71487,
     "duration": 4760
   },
@@ -266,20 +267,13 @@ Example data successful response:
 }
 ```
 
-#### !!!! TO BE DETERMINED !!!!
 Example data failure response:
 
 ```json
 Response Status Code: 422
 
 {
-  "errors": [
-    "Origin can't be blank",
-    "Place1 can't be blank",
-    "Place2 can't be blank",
-    "Place3 can't be blank",
-    "Destination can't be blank"
-  ]
+  "message": "Invalid request. Missing the 'origin' parameter. REQUEST_DENIED Check your addresses"
 }
 ```
 
@@ -301,7 +295,9 @@ Parameters:
 | place1 | string | first location user enters         |
 | place2     | string | second location user enters              |
 | place3     | string | third location user enters              |
-| destination    | string | final location that user wants to end up at             |
+| destination|string|final location that user wants to end up at             |
+|name          |  string |{optional} name of trip|
+|description| string| {optional} description of trip| 
 
 Example data successful response:
 
@@ -312,6 +308,7 @@ Response Status Code: 201
   "id": 12,
   "trip": {
     "name": "hello",
+    "description": "hey",
     "distance": 71487,
     "duration": 4760
   },
@@ -347,20 +344,13 @@ Response Status Code: 201
 }
 ```
 
-#### !!!! TO BE DETERMINED !!!!
 Example data failure response:
 
 ```json
 Response Status Code: 422
 
 {
-  "errors": [
-    "Origin can't be blank",
-    "Place1 can't be blank",
-    "Place2 can't be blank",
-    "Place3 can't be blank",
-    "Destination can't be blank"
-  ]
+  "message": "Invalid request. Missing the 'origin' parameter. REQUEST_DENIED Check your addresses"
 }
 ```
 
@@ -383,6 +373,7 @@ Response Status Code: 200
   "id": 12,
   "trip": {
     "name": "hello",
+    "description": "hey",
     "distance": 71487,
     "duration": 4760
   },
@@ -442,6 +433,7 @@ Response Data Code: 200
     "id": 1,
     "trip": {
       "name": "hello",
+      "description": "hey",
       "created_at": "2015-06-27T20:54:53.345Z"
     }
   },
@@ -449,6 +441,7 @@ Response Data Code: 200
     "id": 2,
     "trip": {
       "name": "hello",
+      "description": "hey",
       "created_at": "2015-06-27T20:57:15.052Z"
     }
   },
@@ -456,6 +449,7 @@ Response Data Code: 200
     "id": 3,
     "trip": {
       "name": "hello",
+      "description": "hey",
       "created_at": "2015-06-27T22:07:00.162Z"
     }
   }
