@@ -8,7 +8,7 @@ class TripsController < ApplicationController
     waypoints = [ params[:place1], params[:place2], params[:place3]]
     waypoints = self.to_string(waypoints)
 
-    legs = self.google_query(params[:origin],params[:destination], waypoints)
+    legs = self.google_query(params[:origin],params[:destination], waypoints, params[:mode])
     if !legs.nil?
       # data
       @duration = self.get_duration(legs)
@@ -53,7 +53,7 @@ class TripsController < ApplicationController
     waypoints = self.to_string(waypoints)
     destination = @trip.places.find_by(place_type: "destination").address
 
-    legs = self.google_query(origin,destination, waypoints)
+    legs = self.google_query(origin, destination, waypoints, params[:mode])
 
     # data
     @duration = self.get_duration(legs)
@@ -69,7 +69,7 @@ class TripsController < ApplicationController
     waypoints = [ params[:place1], params[:place2], params[:place3]]
     waypoints = self.to_string(waypoints)
 
-    legs = self.google_query(params[:origin],params[:destination], waypoints)
+    legs = self.google_query(params[:origin],params[:destination], waypoints, mode)
 
     if !legs.nil?
       # data
@@ -123,6 +123,8 @@ class TripsController < ApplicationController
     legs.each do |leg|
       duration += leg['duration']['value']
     end
+    @seconds = duration
+    duration = self.time_calculation(duration)
     duration
   end
 
@@ -131,14 +133,17 @@ class TripsController < ApplicationController
     legs.each do |leg|
       distance += leg['distance']['value']
     end
+    distance = self.distance_calc(distance)
     distance
   end
 
-  def google_query(origin,destination,waypoints)
-    options = { query: { origin: origin, destination: destination, 
-                          waypoints: "optimize:true#{waypoints}"}, 
-                          units: "imperial" }
+  def google_query(origin, destination, waypoints, mode)
+    options = { query: {  origin: origin, destination: destination, 
+                          waypoints: "optimize:true#{waypoints}", 
+                          units: "imperial", mode: mode 
+                          } }
     response = HTTParty.get(BASE_URL,options)
+    binding.pry
     if response['error_message'] || response['status'] == "ZERO_RESULTS"
       @error_message = response['error_message']
       @no_results = response['status'] + " Check your addresses"
@@ -178,6 +183,20 @@ class TripsController < ApplicationController
       latitude: legs.last['end_location']['lat'],
       longitude: legs.last['end_location']['lng']
     }
+  end
+
+  def time_calculation(total_seconds)
+    seconds = total_seconds % 60
+    minutes = (total_seconds / 60) % 60
+    hours = total_seconds / (60 * 60) % 24
+    # days = total_seconds / (60 * 60 * 24) % 7
+    # weeks = total_seconds / (60 * 60 * 24 * 7)
+    format("%02d hrs, %02d mins, %02d secs", hours, minutes, seconds)
+  end
+
+  def distance_calc(distance)
+    distance = (distance.to_f/1609.34.to_f).round(2)
+    distance
   end
 
 end
