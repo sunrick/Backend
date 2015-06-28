@@ -143,7 +143,6 @@ class TripsController < ApplicationController
                           units: "imperial", mode: mode 
                           } }
     response = HTTParty.get(BASE_URL,options)
-    binding.pry
     if response['error_message'] || response['status'] == "ZERO_RESULTS"
       @error_message = response['error_message']
       @no_results = response['status'] + " Check your addresses"
