@@ -18,13 +18,9 @@ To do this make sure you set 'Access-Token' equal to the user's access token in 
 
 ### New user registration
 
-Access-Token:
+Access-Token:    *Not required.*
 
-Not required.
-
-Path:
-
-`POST '/users/register'`
+Path: `POST '/users/register'`
 
 Parameters:
 
@@ -67,11 +63,9 @@ Response Status Code: 422
 ### User login
 
 Access-Token:
-
-Not required.
+* Not required.*
 
 Path:
-
 `POST '/users/login'`
 
 Parameters:
@@ -104,12 +98,9 @@ Response Status Code: 422
 ### Get current user profile
 
 Access-Token:
+*Required.*
 
-Required.
-
-Path:
-
-`GET '/user/profile'`
+Path: `GET '/user/profile'`
 
 Example data successful response:
 
@@ -132,15 +123,21 @@ Response Status Code: 404
   "message": "There is no user to display."
 }
 ```
+Or if access token is wrong or empty:
 
+```
+Response Status Code: 401
+
+{
+  "message":"Access-Token not found."
+}
+```
 ### Update current user profile
 
 Access-Token:
-
-Required.
+*Required.*
 
 Path:
-
 `PUT '/user/profile'`
 
 Parameters:
@@ -174,13 +171,20 @@ Response Status Code: 404
   "message": "There is no user to display."
 }
 ```
+Or if access token is wrong or empty:
+
+```
+Response Status Code: 401
+
+{
+  "message": "Access-Token not found."
+}
+```
 ###Delete a User
 Access-Token:
-
-Required.
+*Required.*
 
 Path:
-
 `DELETE '/user'`
 
 Example data successful response:
@@ -216,7 +220,9 @@ Parameters:
 | place1 | string | first location user enters         |
 | place2     | string | second location user enters              |
 | place3     | string | third location user enters              |
-| destination    | string | final location that user wants to end up at             |
+| destination|string|final location that user wants to end up at             |
+|name          |  string |{optional} name of trip|
+|description| string| {optional} description of trip| 
 
 Example data successful response:
 
