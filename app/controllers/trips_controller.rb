@@ -8,9 +8,7 @@ class TripsController < ApplicationController
     waypoints = [ params[:place1], params[:place2], params[:place3], 
                   params[:place4], params[:place5], params[:place6],
                   params[:place7], params[:place8]]
-    binding.pry
     waypoints = waypoints.compact
-    binding.pry
     waypoints = self.to_string(waypoints)
     legs = self.google_query(params[:origin],params[:destination], waypoints, params[:mode])
     if !legs.nil?
