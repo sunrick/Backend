@@ -5,9 +5,13 @@ class TripsController < ApplicationController
 
   def create
     ## FOR SOME REASON DOESN'T REQUIRE API KEY
-    waypoints = [ params[:place1], params[:place2], params[:place3]]
+    waypoints = [ params[:place1], params[:place2], params[:place3], 
+                  params[:place4], params[:place5], params[:place6],
+                  params[:place7], params[:place8]]
+    binding.pry
+    waypoints = waypoints.compact
+    binding.pry
     waypoints = self.to_string(waypoints)
-
     legs = self.google_query(params[:origin],params[:destination], waypoints, params[:mode])
     if !legs.nil?
       # data
@@ -66,7 +70,10 @@ class TripsController < ApplicationController
   end
 
   def update
-    waypoints = [ params[:place1], params[:place2], params[:place3]]
+    waypoints = [ params[:place1], params[:place2], params[:place3], 
+                  params[:place4], params[:place5], params[:place6],
+                  params[:place7], params[:place8]]
+    waypoints = waypoints.compact
     waypoints = self.to_string(waypoints)
 
     legs = self.google_query(params[:origin],params[:destination], waypoints, mode)
@@ -81,30 +88,26 @@ class TripsController < ApplicationController
 
       @trip = current_user.trips.find(params[:id])
 
+      #destroy all places for the trip
+      @trip.places.destroy_all
+
       @trip.update(name: params[:name], description: params[:description])
-      
-      # update origin
-      @trip.places.find_by(place_type: 'origin').update( address: @origin[:address], 
-                      latitude: @origin[:latitude], longitude: @origin[:longitude])
-      # update destination
-      @trip.places.find_by(place_type: 'destination').update( address: @destination[:address], 
-                  latitude: @destination[:latitude], longitude: @destination[:longitude])
 
-      # update waypoints
-      waypoints = @trip.places.where(place_type: 'waypoint')
-      waypoints.each do |waypoint|
-        # @waypoint is new waypoint
-        waypoint_update = @waypoints.first
-        @trip.places.find_by(place_type: 'waypoint')
-                      .update( address: waypoint_update[:address], 
-                             latitude: waypoint_update[:latitude], 
-                             longitude: waypoint_update[:longitude] )
-
-        # delete first waypoint
-        if !@waypoint.nil?
-          @waypoint.shift
-        end
+      # create origin
+      @trip.places.create( user_id: current_user.id, address: @origin[:address], 
+                      latitude: @origin[:latitude], longitude: @origin[:longitude],
+                      place_type: "origin" )
+      # create waypoints
+      @waypoints.each do |waypoint|
+        @trip.places.create( user_id: current_user.id, address: waypoint[:address], 
+                      latitude: waypoint[:latitude], longitude: waypoint[:longitude],
+                      place_type: "waypoint" )
       end
+      # create destination
+      @trip.places.create( user_id: current_user.id, address: @destination[:address], 
+                      latitude: @destination[:latitude], longitude: @destination[:longitude],
+                      place_type: "destination" )
+
       render 'create.json.jbuilder'
     else
       render json: { message: "#{@error_message} #{@no_results}"},
